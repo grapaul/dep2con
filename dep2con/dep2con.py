@@ -128,7 +128,7 @@ def check_head(
 
 
 def heads(sent_in_dics: Iterable[WordData]) -> List[int]:
-    """Return sorted IDs of words that have dependants."""
+    """Return sorted IDs of words that have dependents."""
     return sorted({word['head_id'] for word in sent_in_dics if word['head_id'] != 0})
 
 
@@ -151,7 +151,7 @@ def rearrange_pp(sent_in_dics: SentenceData) -> SentenceData:
 
 
 def rearrange_cop(sent_in_dics: SentenceData) -> SentenceData:
-    """Promote eligible copulas and reattach selected dependants."""
+    """Promote eligible copulas and reattach selected dependents."""
     copula: WordData = {}
     nominal_predicate: WordData = {}
 
@@ -176,14 +176,14 @@ def rearrange_cop(sent_in_dics: SentenceData) -> SentenceData:
                 parent['head_id'], parent['rel'] = word['idw'], 'cop'
                 word['head_id'], word['rel'] = 0, 'root'
 
-    for dependant in sent_in_dics.values():
+    for dependent in sent_in_dics.values():
         if (
             copula
             and nominal_predicate
-            and dependant['head_id'] == nominal_predicate['idw']
-            and dependant['rel'] in ['nsubj', 'advmod', 'obl']
+            and dependent['head_id'] == nominal_predicate['idw']
+            and dependent['rel'] in ['nsubj', 'advmod', 'obl']
         ):
-            dependant['head_id'] = copula['idw']
+            dependent['head_id'] = copula['idw']
 
     return sent_in_dics
 
@@ -191,7 +191,7 @@ def rearrange_cop(sent_in_dics: SentenceData) -> SentenceData:
 def find_children(
     head_ids: Iterable[int], sent_in_dics: Mapping[int, WordData]
 ) -> Tuple[ConstituencyMap, Dict[str, List[str]]]:
-    """Return dependant IDs and forms grouped by each head ID."""
+    """Return dependent IDs and forms grouped by each head ID."""
     constituents: ConstituencyMap = {}
     constituent_words: Dict[str, List[str]] = {}
 
@@ -411,7 +411,7 @@ def select_spec_cons(
     output_list: List[Dict[int, List[List[Any]]]] = []
     output_categories: Dict[int, str] = {}
     for category, category_constituents in constituents.items():
-        output_parts.append(f'{category}:\n')
+        output_parts.append(f'\t{category}s:\n')
         for head_id, span in category_constituents.items():
             output_categories[head_id] = category
             words = [
@@ -419,7 +419,7 @@ def select_spec_cons(
                 for word_id in range(span[0], span[1] + 1)
             ]
             output_list.append({head_id: words})
-            output_parts.extend(('--', ''.join(f'{word[1]} ' for word in words), '\n'))
+            output_parts.extend((''.join(f'{word[1]} ' for word in words), '\n'))
 
     output = ''.join(output_parts)
     if not output_list:
@@ -440,8 +440,8 @@ def one_word_const(
     for head_id, word in sent_w_dicts.items():
         if word['head_id'] == 0:
             category = phrase_dict[word['pos']]
-            dependant = [[word['idw'], word['wf']]]
-            output_list.append({head_id: dependant})
+            dependent = [[word['idw'], word['wf']]]
+            output_list.append({head_id: dependent})
             output_categories[head_id] = category
             output = f'[{category} {word["wf"]}]'
 

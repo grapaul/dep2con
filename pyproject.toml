@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dep2con"
+version = "0.1.0"
+description = "Convert Universal Dependencies parses into constituency representations."
+readme = "readme.md"
+requires-python = ">=3.14"
+license = "MIT"
+authors = [
+    {name = "Pavel"},
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+    "pyconll>=4.0.0",
+    "stanza",
+]
+
+[project.optional-dependencies]
+dev = [
+    "build>=1.2",
+    "pytest>=8.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["dep2con*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

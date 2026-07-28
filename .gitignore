@@ -1,0 +1,16 @@
+# Python bytecode and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+
+# Build and test artifacts
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+
+# IDE files
+.idea/
+
+# Generated program output
+result_const.txt

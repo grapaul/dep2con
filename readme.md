@@ -34,21 +34,21 @@ for dep2con in t_s:
     for i in dep2con.x_phrases:
         print(i)
 ```
-`[VP [NP I] saw [NP a UFO] [PP in [NP the backyard]]] .`
-`...`
-`  NPs:`
-`I 
-a UFO 
-the backyard` 
-`  VPs:
-I saw a UFO in the backyard 
-  PPs:
-in the backyard`
+`[VP [NP I] saw [NP a UFO] [PP in [NP the backyard]]] .`  
+`...`  
+`  NPs:`  
+`I   
+a UFO   
+the backyard`  
+`  VPs:  
+I saw a UFO in the backyard   
+  PPs:  
+in the backyard`  
 
 #### More on usage (for a CoNLL-U format):
 
 ```
-t_s = make_const("input.conllu")
+t_s = make_const("conllu")
 
 for dep2con in t_s:
     print(dep2con.sent_parse)

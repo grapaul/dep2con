@@ -1,7 +1,7 @@
 # dep2con
 
 `dep2con` converts Universal Dependencies (UD) parses into constituency
-representations. It accepts either a CoNLL-U format or text processed for the
+representations. It accepts either a CoNLL-U format or text for the
 Stanza dependency parser.
 
 ## Requirements

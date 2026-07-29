@@ -1,7 +1,7 @@
 # dep2con
 
 `dep2con` converts Universal Dependencies (UD) parses into constituency
-representations. It accepts either a CoNLL-U file or text processed with the
+representations. It accepts either a CoNLL-U format or text processed for the
 Stanza dependency parser.
 
 ## Requirements
@@ -37,13 +37,13 @@ for dep2con in t_s:
 `[VP [NP I] saw [NP a UFO] [PP in [NP the backyard]]] .`  
 `...`  
 `  NPs:`  
-`I   
-a UFO   
-the backyard`  
-`  VPs:  
-I saw a UFO in the backyard   
-  PPs:  
-in the backyard`  
+`I`  
+`a UFO`  
+`the backyard`  
+`  VPs:`  
+`I saw a UFO in the backyard`  
+`  PPs:`  
+`in the backyard`  
 
 #### More on usage (for a CoNLL-U format):
 
@@ -79,5 +79,5 @@ Each result has these attributes:
 - `xps`: bool, return specific phrases separately, `default = True`
 - `emb`: bool, returns subconstituents, not only maximal projection, if True, `default = True`
 - `h_terminals`: List[str], terminals to be put in brackets w/out dependents, `default = ['NOUN', 'PRON', 'PROPN', 'ADV']`
-- `selected_cons`: List[str],  when we want only some specific constituents only, `default = ['NP', 'VP', 'PP', 'AP', 'AdvP', 'NumP', 'PartP', 'CCONJP', 'INTJP', 'Particle', 'SCONJP', 'SYMP', 'XP']`
+- `selected_cons`: List[str],  when we want some specific constituents only, `default = ['NP', 'VP', 'PP', 'AP', 'AdvP', 'NumP', 'PartP', 'CCONJP', 'INTJP', 'Particle', 'SCONJP', 'SYMP', 'XP']`
 

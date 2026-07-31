@@ -479,7 +479,7 @@ def make_const(
         source = (
             'STANZA'
             if use_parser
-            else sentence.meta['source'] if sentence.meta else ''
+            else sentence.meta.get('source', '') if sentence.meta else ''
         )
 
         sent_w_dicts = rearrange_cop(rearrange_pp(sent_dict))

@@ -42,21 +42,26 @@ def wf_to_dic(wf_string: str) -> WordData:
     """Convert one tab-separated UD token line into the internal word mapping."""
     word_data: WordData = {}
     fields = wf_string[:-1].split('\t')
+    if (
+            len(fields) < 7
+            or wf_string.startswith('#')
+            or not fields[0].isdigit()
+    ):
+        return {}
 
-    if len(fields) >= 6 and not wf_string.startswith('#'):
-        part_of_speech = 'PTCPL' if 'VerbForm=Part' in fields[4] else fields[3]
-        word_data = {
-            'idw': int(fields[0]),
-            'wf': fields[1],
-            'nf': fields[2],
-            'pos': part_of_speech,
-            'xpos': '_',
-            'tags': fields[4],
-            'head_id': 0 if fields[5] == 'root' else int(fields[5]),
-            'rel': fields[6],
-            'deps': '_',
-            'misc': '_',
-        }
+    part_of_speech = 'PTCPL' if 'VerbForm=Part' in fields[4] else fields[3]
+    word_data = {
+        'idw': int(fields[0]),
+        'wf': fields[1],
+        'nf': fields[2],
+        'pos': part_of_speech,
+        'xpos': '_',
+        'tags': fields[4],
+        'head_id': 0 if fields[5] == 'root' else int(fields[5]),
+        'rel': fields[6],
+        'deps': '_',
+        'misc': '_',
+    }
 
     return word_data
 
